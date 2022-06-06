@@ -9,4 +9,5 @@ export default Title;
 const TitleText = styled.div`
   font-size: 50px;
   font-weight: 600;
+  margin-bottom: 20px;
 `;

@@ -161,6 +161,7 @@ export default App;
 const Wrapper = styled.div`
   box-sizing: border-box;
   text-align: center;
+  padding: 20px;
 `;
 
 const FavoritesList = styled.div`
