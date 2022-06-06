@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "./components/Title";
-import "./App.css";
+import styled from "styled-components";
 
 const jsonLocalStorage = {
   setItem: (key, value) => {
@@ -68,7 +68,11 @@ function CatItem(props) {
 
 function Favorites({ favorites }) {
   if (favorites.length === 0) {
-    return <div>사진 위 하트를 눌러 고양이 사진을 저장하시라구욘</div>;
+    return (
+      <FavoritesList>
+        사진 위 하트를 눌러 고양이 사진을 저장하시라구욘
+      </FavoritesList>
+    );
   }
 
   return (
@@ -86,7 +90,7 @@ const MainCard = ({ img, onHeartClick, alreadyFavorite }) => {
   return (
     <div className="main-card">
       <img src={img} alt="고양이" width="400" />
-      <button onClick={onHeartClick}>{heartIcon}</button>
+      <Likebutton onClick={onHeartClick}>{heartIcon}</Likebutton>
     </div>
   );
 };
@@ -139,7 +143,7 @@ const App = () => {
   const counterTitle = counter === null ? "" : counter + "번째";
 
   return (
-    <div>
+    <Wrapper>
       <Title>{counterTitle} 고양이 가라사대</Title>
       <Form updateMainCat={updateMainCat} />
       <MainCard
@@ -148,8 +152,27 @@ const App = () => {
         alreadyFavorite={alreadyFavorite}
       />
       <Favorites favorites={favorites} />
-    </div>
+    </Wrapper>
   );
 };
 
 export default App;
+
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  text-align: center;
+`;
+
+const FavoritesList = styled.div`
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+`;
+
+const Likebutton = styled.button`
+  position: relative;
+  left: -45px;
+  bottom: 15px;
+`;
