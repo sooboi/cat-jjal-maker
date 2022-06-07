@@ -44,25 +44,25 @@ const Form = ({ updateMainCat }) => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input
+    <FormBox onSubmit={handleFormSubmit}>
+      <Input
         type="text"
         name="name"
-        placeholder="영어 대사를 입력해주세요"
+        placeholder="영어 대사를 입력하시오."
         value={value}
         onChange={handleInputChange}
       />
-      <button type="submit">Make</button>
-      <p style={{ color: "red" }}>{errorMessage}</p>
-    </form>
+      <MakeBtn type="submit">생성</MakeBtn>
+      <Alert>{errorMessage}</Alert>
+    </FormBox>
   );
 };
 
 function CatItem(props) {
   return (
-    <li>
+    <List>
       <img src={props.img} style={{ width: "150px" }} />
-    </li>
+    </List>
   );
 }
 
@@ -70,17 +70,17 @@ function Favorites({ favorites }) {
   if (favorites.length === 0) {
     return (
       <FavoritesList>
-        사진 위 하트를 눌러 고양이 사진을 저장하시라구욘
+        사진 위 하트를 눌러 고양이 사진을 저장하시라구욘 😾
       </FavoritesList>
     );
   }
 
   return (
-    <ul className="favorites">
+    <Ul className="favorites">
       {favorites.map((cat) => (
         <CatItem img={cat} key={cat} />
       ))}
-    </ul>
+    </Ul>
   );
 }
 
@@ -88,10 +88,10 @@ const MainCard = ({ img, onHeartClick, alreadyFavorite }) => {
   const heartIcon = alreadyFavorite ? "💖" : "🤍";
 
   return (
-    <div className="main-card">
+    <Main className="main-card">
       <img src={img} alt="고양이" width="400" />
       <Likebutton onClick={onHeartClick}>{heartIcon}</Likebutton>
-    </div>
+    </Main>
   );
 };
 
@@ -144,7 +144,7 @@ const App = () => {
 
   return (
     <Wrapper>
-      <Title>{counterTitle} 고양이 가라사대</Title>
+      <Title>{counterTitle} 수냥이 랜덤짤</Title>
       <Form updateMainCat={updateMainCat} />
       <MainCard
         img={mainCat}
@@ -159,21 +159,68 @@ const App = () => {
 export default App;
 
 const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
   text-align: center;
+  background-color: black;
   padding: 20px;
 `;
 
+const FormBox = styled.form`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+`;
+
+const Input = styled.input`
+  width: 320px;
+  height: 25px;
+  &::placeholder {
+    font-family: "BMJUA";
+    text-align: center;
+  }
+`;
+
+const MakeBtn = styled.button`
+  font-family: "BMJUA";
+  width: 50px;
+  height: 30px;
+  border: none;
+  background-color: yellow;
+  border-radius: 8px;
+  margin-left: 5px;
+  transition: all 0.5s;
+  &:hover {
+    background-color: orange;
+    transition: all 0.2s;
+  }
+`;
+
+const Alert = styled.p`
+  color: yellowgreen;
+`;
+
 const FavoritesList = styled.div`
-  list-style: none;
+  font-family: "BMJUA";
+  padding: 20px;
+  color: white;
+`;
+
+const Ul = styled.ul`
   display: flex;
+  list-style: none;
   justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
 `;
+
+const List = styled.li``;
 
 const Likebutton = styled.button`
   position: relative;
   left: -45px;
   bottom: 15px;
 `;
+
+const Main = styled.div``;
